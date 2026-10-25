@@ -8,11 +8,9 @@ date: today
 
 # Final class exercise for the OS course in Finse 2026
 
-
-
 ## 1. Create RStudio project and connect to GitHub
 
-There are several ways of creating a directory in GitHub. I find easiest to create  new R project in RStudio as a local repository and then push it to GitHub. 
+There are several ways of creating a directory in GitHub. I find easiest to create new R project in RStudio as a local repository and then push it to GitHub.
 
 The first thing to do (that I always forget!) is to commit at least one file, before you can push the repo to GitHub. Usually these will be files that are automatically generated (.gitignore and the .Rproj itself). Once that is done, you can push your repo to GitHub. A useful package here is `usethis`.
 
@@ -31,7 +29,6 @@ usethis::use_readme_md()
 ```
 
 I have also created a new quarto file to work on my script and the final output (this one), and updated the README file to include relevant information.
-
 
 ## 2. Make content
 
@@ -55,6 +52,7 @@ species_data <- occ_data(scientificName = "Ochotona collaris")
 ```
 
 Because the code above can take some time to run, I have also saved the download from GBIF and saved it as a csv file `ocollaris_download.csv` that can be directly used.
+
 ```{r}
 #| label: shortcut-to-download
 #| eval: true
@@ -68,9 +66,10 @@ species_data <- read_delim("ocollaris_download.csv",
     delim = "\t", escape_double = FALSE, trim_ws = TRUE)
 ```
 
-
 ### 2.2 Cleaning the data
+
 First of all, load the libraries we will use:
+
 ```{r}
 #| label: loading-libraries
 #| message: false
@@ -78,8 +77,8 @@ First of all, load the libraries we will use:
 library(tidyverse)
 ```
 
-
 The dataset contains too many columns that we are not going to use.
+
 ```{r}
 #| label: cleaning-dataset
 #| eval: true
@@ -91,7 +90,9 @@ species_data <- species_data |>
 ```
 
 ### 2.3 Making one figure
+
 We will plot the number of collared pika observations per year in each country.
+
 ```{r}
 #| label: plotting-the-data
 #| eval: true
@@ -123,10 +124,13 @@ ggplot(summary_Ocollaris, aes(x = year, y = n_observations, fill = countryCode))
                     na.value = "#D3D3D3") +
   theme_classic()
 ```
-That is impressive - observations go back to `min(species_data$year, na.rm = TRUE)`!
+
+That is impressive - observations go back to `{r} min(species_data$year, na.rm = TRUE)`!
 
 ### 2.4 Using at least one function
+
 Just as an exercise, I will create a function to plot my figure directly from species occurrence data. Ideally the function should be more general, but this works for now :)
+
 ```{r}
 #| label: creating-a-function
 #| eval: false
@@ -160,3 +164,13 @@ plot_obs_over_time <- function(dataset) {
 plot_obs_over_time(species_data)
 ```
 
+### 3. Noas comment (25.10.2026) :
+
+I didn't know the collared pika before, cool animal :D
+![Collared Pika Gathering Plants in Alaksa](OS_course_Fri_exercise_files/Pika2249.jpeg)
+
+The `annotate` function in ggplot is new to me as weel, nice tool with the arrow!
+
+In the `chunk of code` embedded in the text after the figure the `{r}` was missing in order to let it run and show the year in the text. Beside that the code run smoothly on my computer!
+
+Very nice and reproducible!!!
